@@ -5,12 +5,13 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long vehicle_id;
-
     private String vin;
+
+    Vehicle() {
+    }
 
     Vehicle(String vin) {
         this.vin = vin;
