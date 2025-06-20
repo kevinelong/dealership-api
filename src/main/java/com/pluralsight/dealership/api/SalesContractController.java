@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +24,12 @@ public class SalesContractController {
     @GetMapping("/sales_contracts")
     public List<SalesContract> get() {
         return (List<SalesContract>) dao.findAll();
+    }
+
+    //READ - GET BETWEEN
+    @GetMapping("/sales_contracts/between/") // ?from=xxx&to=yyy
+    public List<SalesContract> getBetween(@RequestParam LocalDate from, @RequestParam LocalDate to) {
+        return (List<SalesContract>) dao.findBetween(from, to);
     }
 
     //CREATE
