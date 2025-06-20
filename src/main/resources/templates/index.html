@@ -6,12 +6,50 @@
     <title> Car Dealerships Home </title>
 </head>
 <body>
-    <h1> Car Dealerships Home </h1>
-    <h2 th:text="${message}"></h2>
-    <form method="post" action="/vehicle">
-        <input type="text" name="vin">
-        <input type="submit" value="SAVE">
-    </form>
+<h1> Car Dealerships Home </h1>
+<div>
+    <input type="text" name="vin" placeholder="vin" id="vin">
+    <input type="text" name="make" placeholder="make" id="make">
+    <input type="text" name="model" placeholder="model" id="model">
+    <input type="number" name="year" placeholder="year" id="year">
+    <input type="text" name="color" placeholder="color" id="color">
+    <input type="number" name="price" placeholder="price" id="price">
+    <input type="submit" value="SAVE" id="save">
+</div>
+<h2>Existing Items</h2>
+<div id="results">
 
+</div>
+<script>
+    async function init(){
+        const response = await fetch("/vehicle");
+        const data = await response.json();
+        console.log(data);
+        results.innerHTML = data.map(o=>`
+            <div>VIN:${o.vin}</div>
+            <div>MAKE:${o.make}</div>
+        `).join("<br>");
+    }
+    init();
+
+    save.addEventListener("click", async e => {
+        console.log(vin.value);
+        const response = await fetch("/vehicle", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            vin:   vin.value,
+            make:  make.value,
+            model: model.value,
+            year:  year.value,
+            color: color.value,
+            price: price.value
+          }),
+        });
+    });
+
+</script>
 </body>
 </html>

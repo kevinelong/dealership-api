@@ -33,15 +33,6 @@ public class VehicleController {
         return (List<Vehicle>) dao.findByColor(color);
     }
 
-    //Traditional HTML Form POST uses @RequestParam
-//    @PostMapping("/vehicle")
-//    @ResponseStatus(value = HttpStatus.CREATED)
-//    public String createVehicle(@RequestParam String vin) {
-//        Vehicle vehicle = new Vehicle(vin);
-//        dao.save(vehicle);
-//        return vin;
-//    }
-
     //CREATE
     //JSON form post uses @RequestBody
     @PostMapping("/vehicle")
