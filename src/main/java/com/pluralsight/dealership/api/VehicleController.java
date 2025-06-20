@@ -27,6 +27,12 @@ public class VehicleController {
         return (List<Vehicle>) dao.findAll();
     }
 
+    @GetMapping("/vehicle/color/{color}")
+    public List<Vehicle> getVehicleByColor(@PathVariable String color) {
+
+        return (List<Vehicle>) dao.findByColor(color);
+    }
+
     //Traditional HTML Form POST uses @RequestParam
 //    @PostMapping("/vehicle")
 //    @ResponseStatus(value = HttpStatus.CREATED)
